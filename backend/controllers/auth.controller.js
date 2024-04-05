@@ -12,13 +12,13 @@ async function userSignup(req,res) {
                 error:"please fill all the details"
             })
         }
-
         if(!validateEmail(email)){
             return res.status(400).json({error:"Please enter valid email"})
         }
         if(!validatePassword(password)){
             return res.status(400).json({error:"Please enter valid password"})
         }
+        console.log(name, email, password)
 
         const user = await User.findOne({email})
         if(user){
@@ -40,6 +40,7 @@ async function userSignup(req,res) {
 
 
 async function userLogin(req,res){
+    console.log("user login requested ",req.body)
     const {email,password} = req.body
     if(!email || !password){
         return res.status(400).json({error:"please fill all the details"})
@@ -57,7 +58,7 @@ async function userLogin(req,res){
 
     const token = createAccessToken({id:user.id})
     delete user.password
-    res.status(200).json({token,success:true,message:"Login successfully"})
+    res.status(200).json({token,user,success:true,message:"Login successfully"})
 }   
 
 module.exports = {
