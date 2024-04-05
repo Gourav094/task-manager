@@ -1,13 +1,20 @@
 import { Link ,useNavigate} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
-import { userLogin } from "../redux/slice/user"
+import  { userLogin } from "../redux/slice/user"
 import { validateUserData } from "../utils/validation"
+import { useEffect } from "react"
 
 const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const userData = useSelector((user) => user)
-    console.log(userData)
+    const userData = useSelector((state) => state.userData)
+
+    useEffect(() => {
+        console.log(userData.isLoggedin)
+        if(userData.isLoggedin){
+            navigate("/")
+        }
+    },[userData.isLoggedin,navigate])
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -19,7 +26,6 @@ const Login = () => {
             return 
         }
         dispatch(userLogin({ email, password }))
-        navigate('/')
     }
 
     return (

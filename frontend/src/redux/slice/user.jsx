@@ -10,56 +10,33 @@ export const userLogin = createAsyncThunk('userLogin',async ({ email, password }
     return data
 })
 
-export const saveProfile = () => {
-
-}
-
-// export const userLogout = () => {
-//     localStorage.removeItem('token');
-    
-// };
-
 const userSlice = createSlice({
-    name:"user",
+    name:"userData",
     initialState:{
         isLoading:false,
         isError:false,
         user:[],
-        token:''
+        token:'',
+        isLoggedin:false
     },
     extraReducers:(builder) => {
         builder.addCase(userLogin.fulfilled ,(state,action) => {
-            state.isLoading = false
+            state.isLoading = false;
             state.user = action.payload.user;
             state.token = action.payload.token;
+            state.isLoggedin = true;
+            state.isError = false;
         })
         builder.addCase(userLogin.pending ,(state) => {
-            state.isLoading = true
+            state.isLoading = true,
+            state.isLoggedin = false
         })
         builder.addCase(userLogin.rejected ,(state,action) => {
             state.isLoading = false
             state.isError = true
+            state.isLoggedin = false
             console.log("error in getting user data",action.payload)
         })
-
-        // builder.addCase(saveProfile.pending, (state) => {
-        //     state.isLoading = true;
-        //     state.isError = '';
-        // })
-        // builder.addCase(saveProfile.fulfilled, (state, action) => {
-        //     state.isLoading = false;
-        //     state.user = action.payload.user;
-        // })
-        // builder.addCase(saveProfile.rejected, (state, action) => {
-        //     state.isLoading = false;
-        //     state.isError = action.payload;
-        // })
-
-        // builder.addCase(userLogout, (state) => {
-        //     state.user = [];
-        //     state.isLoggedIn = false;
-        //     state.token = '';
-        // });
     }
 })
 

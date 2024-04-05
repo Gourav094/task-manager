@@ -4,7 +4,9 @@ import userReducer from './slice/user'
 
 
 const appStore = configureStore({
-    reducer: userReducer
+    reducer:{
+        userData: userReducer
+    }
 })
 
 export default appStore
