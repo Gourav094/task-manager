@@ -45,20 +45,23 @@ async function userLogin(req,res){
     if(!email || !password){
         return res.status(400).json({error:"please fill all the details"})
     }
+    try{
+        const user = await User.findOne({email})
+        if(!user){
+            return res.status(400).json({error:"User not found"})
+        }
 
-    const user = await User.findOne({email})
-    if(!user){
-        return res.status(400).json({error:"User not found"})
+        const checkPassword = await bcrypt.compare(password, user.password);
+        if(!checkPassword){
+            res.status(400).json({error:"Password is incorrect"})
+        }
+
+        const token = createAccessToken({id:user.id})
+        delete user.password
+        res.status(200).json({token,user,success:true,message:"Login successfully"})
+    }catch(err){
+        console.log("Getting error in user login", err)
     }
-
-    const checkPassword = await bcrypt.compare(password, user.password);
-    if(!checkPassword){
-        res.status(400).json({error:"Password is incorrect"})
-    }
-
-    const token = createAccessToken({id:user.id})
-    delete user.password
-    res.status(200).json({token,user,success:true,message:"Login successfully"})
 }   
 
 module.exports = {

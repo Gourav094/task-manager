@@ -1,7 +1,13 @@
 export function validateUserData(data){
     const {email,password} = data
     const isEmailValid = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)
-    const isPassValid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(password)
-    return isEmailValid && isPassValid
+    const isPassValid = /^(?=.*[!@#$%^&*(),.?":{}|<>]).{8}$/.test(password)
+    if(!isEmailValid){
+        return "Please Enter Valid Email"
+    }
+    else if(!isPassValid){
+        return "Password should contain special character and 8 digits"
+    }
+    return ""
 }
 
