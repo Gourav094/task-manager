@@ -2,6 +2,7 @@ const { default: mongoose } = require('mongoose')
 const Task = require('../models/tasks.model')
 
 async function getAllTasks(req,res) {
+    console.log("Tasks requested")
     const tasks = await Task.find({user:req.user.id})
     if(!tasks){
         res.status(400).json({error:"Unable to find tasks"})
@@ -25,6 +26,7 @@ async function getOneTask(req,res){
 
 async function addNewTask(req,res){
     const {title,description} = req.body
+    console.log(title,description)
     if(!title){
         res.status(400).json({error:"Please enter valid inputs"})
     }

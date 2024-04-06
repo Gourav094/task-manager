@@ -30,7 +30,7 @@ const Signup = () => {
             .then(() => {
                 console.log('account successfully created')
                 dispatch(userLogin({ email: formData.email, password: formData.password }));
-                navigate('/')
+                navigate('/home/tasks')
             })
             .catch(error => console.error("Error creating account:", error));
         }

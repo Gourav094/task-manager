@@ -20,6 +20,7 @@ export const saveProfile = createAsyncThunk('saveProfile',async (token) => {
     return {data,token}
 })
 
+
 const userSlice = createSlice({
     name:"userData",
     initialState:{
@@ -28,6 +29,15 @@ const userSlice = createSlice({
         user:[],
         token:'',
         isLoggedin:false
+    },
+    reducers:{
+        logOut:(state) => {
+            state.isLoading = false;
+            state.isError = false;
+            state.isLoggedin = false;
+            state.token = '';
+            state.user = []; 
+        }
     },
     extraReducers:(builder) => {
         builder.addCase(userLogin.fulfilled ,(state,action) => {
@@ -49,6 +59,7 @@ const userSlice = createSlice({
         })
         builder.addCase(saveProfile.fulfilled, (state, action) => {
             state.isLoading = false;
+            state.isLoggedin = true
             state.user = action.payload.data.user; 
             state.token = action.payload.token;
         });
@@ -62,5 +73,7 @@ const userSlice = createSlice({
         });
     }
 })
+
+export const {logOut} = userSlice.actions
 
 export default userSlice.reducer

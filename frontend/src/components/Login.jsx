@@ -14,7 +14,7 @@ const Login = () => {
     useEffect(() => {
         console.log(userData.isLoggedin)
         if(userData.isLoggedin){
-            navigate("/")
+            navigate("/home/tasks")
         }
     },[userData.isLoggedin,navigate])
 
