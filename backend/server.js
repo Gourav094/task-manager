@@ -21,8 +21,8 @@ app.use('/tasks',taskRouter)
 app.use('/profile',profileRouter)
 
 
-app.use(express.static(path.resolve(__dirname, "../frontend/dist")));
-app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html")));
+app.use(express.static(path.resolve(__dirname, "./build")));
+app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "./build/index.html")));
 
 
 app.listen(PORT,() => {

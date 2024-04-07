@@ -41,20 +41,6 @@ const Home = () => {
                             <span className="ml-2 text-sm">Today</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#"
-                            className="flex items-center p-2 text-base rounded-lg hover:bg-gray-200">
-                            <span className="text-lg"><LuCalendarDays /></span>
-                            <span className="ml-2 text-sm">Next 7 Days</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            className="flex items-center p-2 text-base rounded-lg hover:bg-gray-200">
-                            <span className="text-lg"><LuCalendarDays /></span>
-                            <span className="ml-2 text-sm">Today</span>
-                        </a>
-                    </li>
                     
                 </ul>
             </div>
