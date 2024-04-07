@@ -28,7 +28,6 @@ const Signup = () => {
         if(isValid.length === 0){
             api.post('/auth/signup',formData)
             .then(() => {
-                console.log('account successfully created')
                 dispatch(userLogin({ email: formData.email, password: formData.password }));
                 navigate('/home/tasks')
             })

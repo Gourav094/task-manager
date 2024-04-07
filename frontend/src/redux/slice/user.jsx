@@ -16,7 +16,6 @@ export const saveProfile = createAsyncThunk('saveProfile',async (token) => {
     const { data } = await api.get('/profile', {
         headers: { Authorization: token }
     });
-    console.log(data)
     return {data,token}
 })
 
@@ -51,11 +50,10 @@ const userSlice = createSlice({
             state.isLoading = true,
             state.isLoggedin = false
         })
-        builder.addCase(userLogin.rejected ,(state,action) => {
+        builder.addCase(userLogin.rejected ,(state) => {
             state.isLoading = false
             state.isError = true
             state.isLoggedin = false
-            console.log("error in getting user data",action.payload)
         })
         builder.addCase(saveProfile.fulfilled, (state, action) => {
             state.isLoading = false;
@@ -69,7 +67,6 @@ const userSlice = createSlice({
         builder.addCase(saveProfile.rejected, (state) => {
             state.isLoading = false;
             state.isError = true;
-            console.log("Error in saving profile data");
         });
     }
 })

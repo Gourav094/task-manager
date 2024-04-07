@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit'
 import userReducer from './slice/user'
+import taskSlice from './slice/taskSlice'
 
 
 
 const appStore = configureStore({
     reducer:{
-        userData: userReducer
+        userData: userReducer,
+        taskData: taskSlice
     }
 })
 

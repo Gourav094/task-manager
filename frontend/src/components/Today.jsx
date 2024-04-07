@@ -11,7 +11,7 @@ const Today = () => {
     const taskId = useParams().id
     const Mode = !taskId? "add":"update"
     const [showAddTask,setShowAddTask] = useState(false)
-    console.log(Mode)
+
     const [addData, setAddData] = useState({
         title:"",
         description: ""
@@ -29,6 +29,7 @@ const Today = () => {
           .then((response) => {
             setAddData({title:response.data.task.title, description: response.data.task.description }); 
           });
+          setAddData(false)
         }
       }, [user, taskId]);
 
@@ -49,16 +50,15 @@ const Today = () => {
         };
         if(Mode === "add"){
             try {
-                const {data} = await api.post('/tasks', requestData, config);
-                console.log(data)
+                await api.post('/tasks', requestData, config);
+
             } catch (error) {
                 console.error('Error adding task:', error);
             }
         }
         else if(Mode === "update"){
             try {
-                const {data} = await api.put(`/tasks/${taskId}`, requestData, config);
-                console.log(data)
+                await api.put(`/tasks/${taskId}`, requestData, config);
             } catch (error) {
                 console.error('Error adding task:', error);
             }
@@ -91,7 +91,7 @@ const Today = () => {
                 ) 
             }       
         </div>
-        <Tasks handleAddTask = {handleAddTask}/>            
+        <Tasks handleAddTask = {handleAddTask}/>         
     </div>;
 };
 

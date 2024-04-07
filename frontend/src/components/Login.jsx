@@ -12,7 +12,6 @@ const Login = () => {
     const userData = useSelector((state) => state.userData)
 
     useEffect(() => {
-        console.log(userData.isLoggedin)
         if(userData.isLoggedin){
             navigate("/home/tasks")
         }
@@ -24,10 +23,7 @@ const Login = () => {
         const password = e.target.password.value;
         const isValid = validateUserData({email,password})
         setErrorMsg(isValid)
-        console.log(errorMsg)
-        console.log(errorMsg.length)
         if(errorMsg.length === 0){
-            console.log("No error")
             dispatch(userLogin({ email, password }))
         }
     }

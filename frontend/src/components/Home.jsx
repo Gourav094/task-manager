@@ -3,19 +3,19 @@ import {useDispatch} from "react-redux"
 import { LuCalendarDays } from "react-icons/lu";
 import Today from "./Today";
 import { logOut } from "../redux/slice/user";
+import Description from "./Description";
 const Home = () => {
     const dispatch = useDispatch()
-    // const userData = useSelector((store) => store.userData)
 
     const handleLogout = () => {
-        console.log("handling logout")
         localStorage.removeItem('token');
         document.location.href = '/'
         dispatch(logOut())
     }
 
-    return <div className="flex">
-        <div className="w-60 h-screen px-4 py-4 bg-gray-100 bg-opacity-50 border-r">    
+    return (
+    <div className="grid grid-cols-6">
+        <div className="col-span-1 w-60 h-screen px-4 py-4 bg-gray-100 bg-opacity-50 border-r">    
             <div className="flex justify-between">
                 <div className="group py-1 w-fit px-1 text-sm rounded flex gap-1 cursor-pointer items-center hover:bg-gray-200">
                     <p className="font-medium pl-1">Gourav</p>
@@ -59,10 +59,13 @@ const Home = () => {
                 </ul>
             </div>
         </div>
-        <div>
+        <div className="border-r col-span-3">
             <Today/>
         </div>
-    </div>;
+        <div className="col-span-2">
+            <Description/>   
+        </div>
+    </div>)
 };
 
 export default Home;

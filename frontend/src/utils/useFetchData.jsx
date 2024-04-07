@@ -14,14 +14,12 @@ const useFetchData = () => {
         setData(data => ({...data,loading:true}))
 
             const response = await api.request(config)
-            console.log(response)
             setData({
                 loading:false,
                 data:response,
                 successMsg:response.message || "success",
                 ErrorMsg:""
             })
-            console.log(response.message)
             return Promise.resolve(data);
         
     },[])

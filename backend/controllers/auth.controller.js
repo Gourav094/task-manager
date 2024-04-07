@@ -18,7 +18,6 @@ async function userSignup(req,res) {
         if(!validatePassword(password)){
             return res.status(400).json({error:"Please enter valid password"})
         }
-        console.log(name, email, password)
 
         const user = await User.findOne({email})
         if(user){
@@ -33,14 +32,12 @@ async function userSignup(req,res) {
         res.status(200).json({message:"Your account is successfully created"})
     }
     catch (err) {
-        console.error(err);
         return res.status(500).json({ message: "Internal Server Error" });
     }
 }
 
 
 async function userLogin(req,res){
-    console.log("user login requested ",req.body)
     const {email,password} = req.body
     if(!email || !password){
         return res.status(400).json({error:"please fill all the details"})
@@ -60,7 +57,7 @@ async function userLogin(req,res){
         delete user.password
         res.status(200).json({token,user,success:true,message:"Login successfully"})
     }catch(err){
-        console.log("Getting error in user login", err)
+        res.status(400).json({error:"Internal server error"})
     }
 }   
 
