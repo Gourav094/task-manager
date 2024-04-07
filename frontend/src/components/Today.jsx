@@ -18,11 +18,6 @@ const Today = () => {
     });
 
     useEffect(() => {
-        document.title = Mode === "add" ? "Add task" : "Update Task";
-    }, [Mode]);
-
-
-    useEffect(() => {
         if (Mode === "update") {
             const config = {headers: { Authorization: user.token } };
           api.get(`/tasks/${taskId}`,config)

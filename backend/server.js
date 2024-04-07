@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const app = express()
 const authRouter = require('./routers/auth.router')
 const taskRouter = require('./routers/tasks.router')
@@ -20,10 +21,9 @@ app.use('/tasks',taskRouter)
 app.use('/profile',profileRouter)
 
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.resolve(__dirname, "../frontend/build")));
-    app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "../frontend/build/index.html")));
-}
+app.use(express.static(path.resolve(__dirname, "../frontend/dist")));
+app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html")));
+
 
 app.listen(PORT,() => {
     console.log(`server running on http://localhost:${PORT}`)
