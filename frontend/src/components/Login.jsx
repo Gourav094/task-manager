@@ -17,14 +17,23 @@ const Login = () => {
         }
     },[userData.isLoggedin,navigate])
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault()
         const email = e.target.email.value;
         const password = e.target.password.value;
-        const isValid = validateUserData({email,password})
-        setErrorMsg(isValid)
-        if(errorMsg.length === 0){
-            dispatch(userLogin({ email, password }))
+        const validationError = validateUserData({ email, password });
+
+        if (validationError) {
+            setErrorMsg(validationError);  
+            return; 
+        } else {
+            setErrorMsg(""); 
+        }
+        try {
+            await dispatch(userLogin({ email, password })).unwrap();
+        } catch (error) {
+            console.log("Error:", error);
+            setErrorMsg(error?.response?.data?.error || "Login failed. Please try again.");
         }
     }
 

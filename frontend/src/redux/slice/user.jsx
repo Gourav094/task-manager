@@ -7,6 +7,7 @@ export const userLogin = createAsyncThunk('userLogin',async ({ email, password }
         localStorage.setItem('token', data.token);
         return data;
     } catch (error) {
+        console.log(error)
         localStorage.removeItem('token');
         throw error;
     }

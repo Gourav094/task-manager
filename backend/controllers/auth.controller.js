@@ -20,6 +20,7 @@ async function userSignup(req,res) {
         }
 
         const user = await User.findOne({email})
+        console.log("user already exist!!",user)
         if(user){
             return res.status(200).json({message:"User is already registered"})
         }
@@ -29,7 +30,7 @@ async function userSignup(req,res) {
             email,
             password:hashedPassword
         })
-        res.status(200).json({message:"Your account is successfully created"})
+        return res.status(200).json({message:"Your account is successfully created"})
     }
     catch (err) {
         return res.status(500).json({ message: "Internal Server Error" });
@@ -50,14 +51,14 @@ async function userLogin(req,res){
 
         const checkPassword = await bcrypt.compare(password, user.password);
         if(!checkPassword){
-            res.status(400).json({error:"Password is incorrect"})
+            return res.status(400).json({error:"Password is incorrect"})
         }
 
         const token = createAccessToken({id:user.id})
         delete user.password
-        res.status(200).json({token,user,success:true,message:"Login successfully"})
+        return res.status(200).json({token,user,success:true,message:"Login successfully"})
     }catch(err){
-        res.status(400).json({error:"Internal server error"})
+        return res.status(400).json({error:"Internal server error"})
     }
 }   
 
