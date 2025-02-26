@@ -8,7 +8,7 @@ mongoose.connection.once('open',() => {
 mongoose.connection.on('error',() => {
     console.log(`Error during connecting to mongo`)
 })
-
+console.log(process.env.MONGO_URL)
 async function connectMongo(){
     await mongoose.connect(process.env.MONGO_URL)
 }
