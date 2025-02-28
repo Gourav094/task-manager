@@ -11,7 +11,7 @@ async function verifyToken(req, res, next) {
         const userInfo = jwt.verify(token, JWT_SECRET)
         if(!userInfo){
             return res.status(401).json({ error: "Token is invalid" })
-        }
+        } 
 
         const user = await User.findById(userInfo.id) 
         if(!user){
