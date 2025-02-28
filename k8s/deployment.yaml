@@ -16,6 +16,7 @@ spec:
       containers:
         - name: task-manager
           image: gourav094/task-manager:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           env:
