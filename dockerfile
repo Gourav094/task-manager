@@ -16,5 +16,5 @@ COPY frontend frontend/
 RUN npm run build --prefix frontend
 
 EXPOSE 3000
-
+ 
 CMD ["npm", "start", "--prefix", "backend"]
