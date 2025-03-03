@@ -12,6 +12,7 @@ services:
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongo_db:27017/task-manager
+      - PORT=3000
     volumes:
       - ./backend:/app/backend
       - ./frontend:/app/frontend

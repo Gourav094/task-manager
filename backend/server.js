@@ -1,5 +1,5 @@
 const express = require('express')
-const path = require('path')
+const path = require('path') 
 const app = express()
 const authRouter = require('./routers/auth.router')
 const taskRouter = require('./routers/tasks.router')
@@ -25,6 +25,6 @@ app.use(express.static(path.resolve(__dirname, "./build")));
 app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "./build/index.html")));
 
 
-app.listen(PORT,() => {
-    console.log(`server running on http://localhost:${PORT}`)
+app.listen(process.env.PORT || PORT,() => {
+    console.log(`server running on http://localhost:${process.env.PORT || PORT}`)
 })

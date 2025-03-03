@@ -17,7 +17,7 @@ function App() {
 	}, [user.isLoggedIn, dispatch]);
 
 	return (
-		<BrowserRouter>
+		<BrowserRouter> 
 			<Routes>
 				<Route path="/" element={<Body/>} />
 				<Route path="/login" element={<Login/>} />
@@ -29,4 +29,4 @@ function App() {
 	);
 }
 
-export default App;
+export default App; 
