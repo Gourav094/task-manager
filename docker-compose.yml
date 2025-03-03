@@ -46,6 +46,19 @@ services:
       - ~/.kube/config:/root/.kube/config
       - ~/.minikube:/root/.minikube
     
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+
 volumes:
   mongo-data:
   jenkins-data:
+
+networks:
+  monitoring: {}
