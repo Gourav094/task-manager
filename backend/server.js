@@ -18,7 +18,7 @@ app.use('/auth',authRouter)
 
 app.use('/tasks',taskRouter)
 
-app.use('/profile',profileRouter)
+app.use('/profile',profileRouter) 
 
 
 app.use(express.static(path.resolve(__dirname, "./build")));
